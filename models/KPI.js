@@ -1,49 +1,74 @@
 import mongoose from "mongoose";
-import { loadType } from "mongoose-currency";
+// import { loadType } from "mongoose-currency";
 
+
+// const Schema = mongoose.Schema;
+// loadType(mongoose);
+
+// const daySchema = new Schema(
+//   {
+//     date: String,
+//     revenue: {
+//       type: mongoose.Types.Currency,
+//       currency: "USD",
+//       get: (v) => v/100
+//     },
+//     expenses: {
+//       type: mongoose.Types.Currency,
+//       currency: "USD",
+//       get: (v) => v/100
+//     },
+//   },
+//   { toJSON: {getters: true } }
+// )
 
 const Schema = mongoose.Schema;
-loadType(mongoose);
 
 const daySchema = new Schema(
   {
     date: String,
     revenue: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v/100
+      type: Number,
+      set: (v) => v*100,
+      get: (v) => (v/100).toFixed(2),
+      required: true
     },
     expenses: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v/100
-    },
+      type: Number,
+      set: (v) => v*100,
+      get: (v) => (v/100).toFixed(2),
+      required: true
+    }
   },
-  { toJSON: {getters: true } }
-)
+  { toJSON: { getters: true } }
+);
 
 const monthSchema = new Schema(
   {
     month: String,
     revenue: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v/100
+      type: Number,
+      set: (v) => v*100,
+      get: (v) => (v/100).toFixed(2),
+      required: true
     },
     expenses: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v/100
+      type: Number,
+      set: (v) => v*100,
+      get: (v) => (v/100).toFixed(2),
+      required: true
     },
     operationalExpenses: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v/100
+      type: Number,
+      set: (v) => v*100,
+      get: (v) => (v/100).toFixed(2),
+      required: true
     },
     nonOperationalExpenses: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v/100
+      type: Number,
+      set: (v) => v*100,
+      get: (v) => (v/100).toFixed(2),
+      required: true
     },
   },
   { toJSON: {getters: true } }
@@ -54,26 +79,30 @@ const monthSchema = new Schema(
 const KPISchema = new Schema (
   {
     totalProfit: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v/100
+      type: Number,
+      set: (v) => v*100,
+      get: (v) => (v/100).toFixed(2),
+      required: true
     },
     totalRevenue: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v/100
+      type: Number,
+      set: (v) => v*100,
+      get: (v) => (v/100).toFixed(2),
+      required: true
     },
     totalExpenses: {
-      type: mongoose.Types.Currency,
-      currency: "USD",
-      get: (v) => v/100
+      type: Number,
+      set: (v) => v*100,
+      get: (v) => (v/100).toFixed(2),
+      required: true
     },
     expensesByCategory: {
       type: Object,
       of: {
-        type: mongoose.Types.Currency,
-        currency: "USD",
-        get: (v) => v/100
+        type: Number,
+      set: (v) => v*100,
+      get: (v) => (v/100).toFixed(2),
+      required: true
       }
     },
     monthlyData: [monthSchema],
