@@ -1,25 +1,22 @@
 import mongoose from "mongoose";
-// import { loadType } from "mongoose-currency";
-
 
 const Schema = mongoose.Schema;
-// loadType(mongoose);
 
-
+const USD_TO_CENTS = 100;
 
 const ProductSchema = new Schema (
   {
     price: {
       type: Number,
-      set: (v) => v*100,
-      get: (v) => (v/100).toFixed(2),
-      required: true
+      required: true,
+      get: (v) => (v / USD_TO_CENTS).toFixed(2),
+      set: (v) => Math.round(parseFloat(v) * USD_TO_CENTS)
     },
     expense: {
       type: Number,
-      set: (v) => v*100,
-      get: (v) => (v/100).toFixed(2),
-      required: true
+      required: true,
+      get: (v) => (v / USD_TO_CENTS).toFixed(2),
+      set: (v) => Math.round(parseFloat(v) * USD_TO_CENTS)
     },
     transactions: [{
       type: mongoose.Schema.Types.ObjectId,
@@ -32,3 +29,5 @@ const ProductSchema = new Schema (
 const Product = mongoose.model("Product", ProductSchema);
 
 export default Product;
+
+
